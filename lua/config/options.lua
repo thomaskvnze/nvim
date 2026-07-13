@@ -24,7 +24,7 @@ do
 
   -- Editor --
   vim.opt.number = true -- Make line numbers default
-  vim.opt.relativenumber = true -- Show line numbers as relative numbers
+  vim.opt.relativenumber = false -- Show line numbers as relative numbers
   vim.opt.breakindent = true -- Enable break indent
   vim.opt.signcolumn = 'yes' -- Determine when to show the sign column
   vim.opt.guicursor = "n-v-c-sm:block-blinkwait700-blinkon400-blinkoff250,i-ci-ve:ver25,r-cr-o:hor20"

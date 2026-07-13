@@ -21,9 +21,6 @@ require("config.diagnostics")
 -- Configure git
 require("config.git")
 
--- Configure mini.nvim plugins and modules
-require("config.mini")
-
 -- Configure search and navigation
 require("config.navigation")
 
@@ -37,5 +34,5 @@ require("config.formatting")
 require("config.autocomplete")
 
 -- Miscellaneous utility features
-require("config.utility")
+require("config.editing")
 
