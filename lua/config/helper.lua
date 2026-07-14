@@ -16,5 +16,5 @@ end
 
 return {
   gh = gh,
-	run_build = run_build
+  run_build = run_build,
 }

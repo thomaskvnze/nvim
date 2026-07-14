@@ -4,38 +4,37 @@
 -- ============================================================
 
 -- Set standard neovim options
-require("config.options")
+require 'config.options'
 
 -- Set a theme for neovim
-require("config.theme")
+require 'config.theme'
 
 -- Set keymaps for standard neovim functions
-require("config.keymaps")
+require 'config.keymaps'
 
 -- Configure file browser
-require("config.filebrowser")
+require 'config.filebrowser'
 
 -- Configure treesitter
-require("config.treesitter")
+require 'config.treesitter'
 
 -- Configure diagnostics
-require("config.diagnostics")
+require 'config.diagnostics'
 
 -- Configure git
-require("config.git")
+require 'config.git'
 
 -- Configure search and navigation
-require("config.navigation")
+require 'config.navigation'
 
 -- Confiugre lsps, completions, linters and formatters
-require("config.lsp")
+require 'config.lsp'
 
 -- Configure advanced formatting
-require("config.formatting")
+require 'config.formatting'
 
 -- Configure advanced autocompletion
-require("config.autocomplete")
+require 'config.autocomplete'
 
 -- Miscellaneous utility features
-require("config.editing")
-
+require 'config.editing'

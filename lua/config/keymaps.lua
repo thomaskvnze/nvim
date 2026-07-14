@@ -1,7 +1,7 @@
 -- ============================================================
 -- Keymaps for functions that are neovim standard and don't have a dedicateed config file
 -- ============================================================
-local helper = require("config.helper")
+local helper = require 'config.helper'
 
 -- ============================================================
 -- Whichkey - plugin to show keymaps while tyiping
