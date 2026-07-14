@@ -20,14 +20,17 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add { { src = helper.gh 'L3MON4D3/LuaSnip', version = vim.version.range '2.*' } }
-require('luasnip').setup {}
-
 vim.pack.add { { src = helper.gh 'rafamadriz/friendly-snippets' } }
+require('luasnip').setup {}
+require('luasnip.loaders.from_vscode').lazy_load()
 
 -- ============================================================
 -- Autocomplete engine
 -- ============================================================
+
 vim.pack.add { { src = helper.gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
+
+local only_snippets = false
 require('blink.cmp').setup {
   keymap = {
     -- 'default' (recommended) for mappings similar to built-in completions
@@ -54,6 +57,16 @@ require('blink.cmp').setup {
     preset = 'default',
     -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
     --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+    ['<C-t>'] = {
+      function(cmp)
+        only_snippets = not only_snippets
+        if only_snippets then
+          cmp.show { providers = { 'snippets' } }
+        else
+          cmp.show { providers = { 'lsp', 'path' } }
+        end
+      end,
+    },
   },
 
   appearance = {
@@ -69,7 +82,7 @@ require('blink.cmp').setup {
   },
 
   sources = {
-    default = { 'lsp', 'path', 'snippets' },
+    default = { 'lsp', 'path' },
   },
 
   snippets = { preset = 'luasnip' },

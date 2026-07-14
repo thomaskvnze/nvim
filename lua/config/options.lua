@@ -16,7 +16,7 @@ do
 
   -- Font --
   vim.g.have_nerd_font = true -- Global variable for nerd font. Convention by many plugins
-  vim.opt.encoding = "utf-8"
+  vim.opt.encoding = 'utf-8'
 
   -- Window --
   vim.opt.splitright = true
@@ -27,7 +27,7 @@ do
   vim.opt.relativenumber = false -- Show line numbers as relative numbers
   vim.opt.breakindent = true -- Enable break indent
   vim.opt.signcolumn = 'yes' -- Determine when to show the sign column
-  vim.opt.guicursor = "n-v-c-sm:block-blinkwait700-blinkon400-blinkoff250,i-ci-ve:ver25,r-cr-o:hor20"
+  vim.opt.guicursor = 'n-v-c-sm:block-blinkwait700-blinkon400-blinkoff250,i-ci-ve:ver25,r-cr-o:hor20'
   vim.opt.scrolloff = 10
   vim.opt.list = true
   vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
@@ -57,15 +57,14 @@ do
   vim.opt.inccommand = 'split'
 
   -- Editing --
-  vim.opt.iskeyword:append("-") -- include - in words
-  vim.opt.selection = "inclusive"
-  vim.opt.backspace = "indent,eol,start"
+  vim.opt.iskeyword:append '-' -- include - in words
+  vim.opt.selection = 'inclusive'
+  vim.opt.backspace = 'indent,eol,start'
   vim.opt.tabstop = 2
   vim.opt.shiftwidth = 2
   vim.opt.autoindent = true
   vim.opt.smartindent = true
-  vim.opt.foldmethod = "expr" -- use expression for folding
-  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- use treesitter for folding
+  vim.opt.foldmethod = 'expr' -- use expression for folding
+  vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- use treesitter for folding
   vim.opt.foldlevel = 99 -- start with all folds open
-
 end

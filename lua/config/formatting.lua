@@ -2,7 +2,8 @@
 -- Additional formatting functionality beyond the lsp formatter
 -- ============================================================
 
-local helper = require("config.helper")
+local helper = require 'config.helper'
+local test = 1
 
 vim.pack.add { helper.gh 'stevearc/conform.nvim' }
 require('conform').setup {
@@ -10,7 +11,7 @@ require('conform').setup {
   format_on_save = function(bufnr)
     -- You can specify filetypes to autoformat on save here:
     local enabled_filetypes = {
-      -- lua = true,
+      lua = true,
       -- python = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
@@ -24,6 +25,7 @@ require('conform').setup {
   },
   -- You can also specify external formatters in here.
   formatters_by_ft = {
+    lua = { 'stylua' },
     -- rust = { 'rustfmt' },
     -- Conform can also run multiple formatters sequentially
     -- python = { "isort", "black" },

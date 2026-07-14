@@ -1,16 +1,12 @@
 -- ============================================================
--- Language Servers  
+-- Language Servers
 -- ============================================================
-local helper = require('config.helper')
+local helper = require 'config.helper'
 
 -- Useful status updates for LSP.
 vim.pack.add { helper.gh 'j-hui/fidget.nvim' }
 require('fidget').setup {}
 
---  This function gets run when an LSP attaches to a particular buffer.
---    That is to say, every time a new file is opened that is associated with
---    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
---    function will be executed to configure the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
   callback = function(event)
@@ -70,33 +66,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---  See `:help lsp-config` for information about keys and how to configure
----@type table<string, vim.lsp.Config>
-local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  --
-  -- Some languages (like typescript) have entire language plugins that can be useful:
-  --    https://github.com/pmizio/typescript-tools.nvim
-  --
-  -- But for many setups, the LSP (`ts_ls`) will work just fine
-  -- ts_ls = {},
-	basedright = {},
-  stylua = {}, -- Used to format Lua code
+-- ============================================================
+-- Adding language servers to vim.lsp
+-- ============================================================
 
-  -- Special Lua Config, as recommended by neovim help docs
+vim.pack.add {
+  helper.gh 'neovim/nvim-lspconfig',
+}
+
+local servers = {
+  basedpyright = {},
   lua_ls = {
     on_init = function(client)
       client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
 
-      if client.workspace_folders then
-        local path = client.workspace_folders[1].name
-        if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
-      end
+      if client.workspace_folders then local path = client.workspace_folders[1].name end
 
       client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
         runtime = {
@@ -123,7 +107,7 @@ local servers = {
   },
 }
 
-vim.pack.add {
-  helper.gh 'neovim/nvim-lspconfig',
-}
-
+for name, server in pairs(servers) do
+  vim.lsp.config(name, server)
+  vim.lsp.enable(name)
+end
