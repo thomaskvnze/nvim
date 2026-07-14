@@ -1,7 +1,7 @@
 -- ============================================================
 -- Treesitter and parsers
 -- ============================================================
-local helper = require("config.helper")
+local helper = require 'config.helper'
 
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
@@ -20,7 +20,35 @@ vim.api.nvim_create_autocmd('PackChanged', {
 vim.pack.add { { src = helper.gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
 -- Ensure basic parsers are installed
-local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+local parsers = {
+  'bash',
+  'c',
+  'cmake',
+  'cpp',
+  'css',
+  'diff',
+  'html',
+  'javascript',
+  'json',
+  'jsx',
+  'lua',
+  'luadoc',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'query',
+  'rust',
+  'sql',
+  'svelte',
+  'swift',
+  'terraform',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+}
 require('nvim-treesitter').install(parsers)
 
 ---@param buf integer
@@ -33,8 +61,10 @@ local function treesitter_try_attach(buf, language)
 
   -- Enable treesitter based folds
   -- For more info on folds see `:help folds`
-  -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-  -- vim.wo.foldmethod = 'expr'
+  vim.opt.foldmethod = 'expr'
+  vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+  vim.opt.foldenable = true -- start with folds open
+  vim.opt.foldlevel = 99 -- don't auto-close folds on open
 
   -- Check if treesitter indentation is available for this language, and if so enable it
   -- in case there is no indent query, the indentexpr will fallback to the vim's built in one

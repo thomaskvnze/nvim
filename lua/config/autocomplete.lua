@@ -16,12 +16,13 @@ vim.api.nvim_create_autocmd('PackChanged', {
       if vim.fn.has 'win32' ~= 1 and vim.fn.executable 'make' == 1 then helper.run_build(name, { 'make', 'install_jsregexp' }, ev.data.path) end
       return
     end
-
   end,
 })
 
 vim.pack.add { { src = helper.gh 'L3MON4D3/LuaSnip', version = vim.version.range '2.*' } }
 require('luasnip').setup {}
+
+vim.pack.add { { src = helper.gh 'rafamadriz/friendly-snippets' } }
 
 -- ============================================================
 -- Autocomplete engine
@@ -51,7 +52,6 @@ require('blink.cmp').setup {
     --
     -- See `:help blink-cmp-config-keymap` for defining your own keymap
     preset = 'default',
-
     -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
     --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
   },
@@ -81,7 +81,7 @@ require('blink.cmp').setup {
   -- the rust implementation via `'prefer_rust_with_warning'`
   --
   -- See `:help blink-cmp-config-fuzzy` for more information
-  fuzzy = { implementation = 'lua' },
+  fuzzy = { implementation = 'prefer_rust_with_warning' },
 
   -- Shows a signature help window while you type arguments for a function
   signature = { enabled = true },

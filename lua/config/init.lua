@@ -12,6 +12,9 @@ require("config.theme")
 -- Set keymaps for standard neovim functions
 require("config.keymaps")
 
+-- Configure file browser
+require("config.filebrowser")
+
 -- Configure treesitter
 require("config.treesitter")
 

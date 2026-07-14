@@ -42,3 +42,13 @@ vim.pack.add({
   { src = helper.gh 'nvim-mini/mini.surround', version = 'stable' },
 })
 require('mini.surround').setup()
+
+-- ============================================================
+-- Trouble - a pretty list for diagnostic, references, quickfix
+-- and location lists
+-- ============================================================
+vim.pack.add({
+  { src = helper.gh 'folke/trouble.nvim', version = 'stable' },
+})
+
+require('trouble').setup({})
