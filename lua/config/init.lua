@@ -36,5 +36,11 @@ require 'config.formatting'
 -- Configure advanced autocompletion
 require 'config.autocomplete'
 
+-- Configure testing capabilities
+require 'config.testing'
+
 -- Miscellaneous utility features
 require 'config.editing'
+
+-- Xcodebuild
+require 'config.xcode'

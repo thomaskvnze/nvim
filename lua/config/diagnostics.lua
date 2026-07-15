@@ -2,6 +2,18 @@
 -- Diagnostics settings and keymaps
 -- ============================================================
 
+local helper = require 'config.helper'
+-- ============================================================
+--
+-- Trouble - a pretty list for diagnostic, references, quickfix
+-- and location lists
+-- ============================================================
+vim.pack.add {
+  { src = helper.gh 'folke/trouble.nvim', version = 'stable' },
+}
+
+require('trouble').setup {}
+
 vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
@@ -25,3 +37,13 @@ vim.diagnostic.config {
 }
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- ============================================================
+-- Trouble - a pretty list for diagnostic, references, quickfix
+-- and location lists
+-- ============================================================
+vim.pack.add {
+  { src = helper.gh 'folke/trouble.nvim', version = 'stable' },
+}
+
+require('trouble').setup {}

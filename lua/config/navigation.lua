@@ -43,28 +43,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
     local buf = event.buf
     -- Find references for the word under your cursor.
-    vim.keymap.set('n', 'grr', function() extras.lsp { scope = 'references' } end, { buffer = buf, desc = '[G]oto [R]eferences' })
+    vim.keymap.set('n', 'glr', function() extras.lsp { scope = 'references' } end, { buffer = buf, desc = '[G]oto [R]eferences' })
 
     -- Jump to the implementation of the word under your cursor.
     -- Useful when your language has ways of declaring types without an actual implementation.
-    vim.keymap.set('n', 'gri', function() extras.lsp { scope = 'implementation' } end, { buffer = buf, desc = '[G]oto [I]mplementation' })
+    vim.keymap.set('n', 'gli', function() extras.lsp { scope = 'implementation' } end, { buffer = buf, desc = '[G]oto [I]mplementation' })
 
     -- Jump to the definition of the word under your cursor.
     -- This is where a variable was first declared, or where a function is defined, etc.
     -- To jump back, press <C-t>.
-    vim.keymap.set('n', 'grd', function() extras.lsp { scope = 'definition' } end, { buffer = buf, desc = '[G]oto [D]efinition' })
+    vim.keymap.set('n', 'gld', function() extras.lsp { scope = 'definition' } end, { buffer = buf, desc = '[G]oto [D]efinition' })
 
     -- Fuzzy find all the symbols in your current document<LeftMouse>
     -- Symbols are things like variables, functions, types, etc.
-    vim.keymap.set('n', 'gO', function() extras.lsp { scope = 'document_symbol' } end, { buffer = buf, desc = 'Open Document Symbols' })
+    vim.keymap.set('n', '<leader>ss', function() extras.lsp { scope = 'document_symbol' } end, { buffer = buf, desc = '[S]earch Document [S]ymbols' })
 
     -- Fuzzy find all the symbols in your current workspace.
     -- Similar to document symbols, except searches over your entire project.
-    vim.keymap.set('n', 'gW', function() extras.lsp { scope = 'workspace_symbol_live' } end, { buffer = buf, desc = 'Open Workspace Symbols' })
+    vim.keymap.set('n', '<leader>sw', function() extras.lsp { scope = 'workspace_symbol_live' } end, { buffer = buf, desc = '[S]earch [W]orkspace Symbols' })
 
     -- Jump to the type of the word under your cursor.
     -- Useful when you're not sure what type a variable is and you want to se<LeftMouse>
     -- the definition of its *type*, not where it was *defined*.
-    vim.keymap.set('n', 'grt', function() extras.lsp { scope = 'type_definition' } end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+    vim.keymap.set('n', 'glt', function() extras.lsp { scope = 'type_definition' } end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
   end,
 })

@@ -17,18 +17,25 @@ vim.pack.add { helper.gh 'folke/todo-comments.nvim' }
 require('todo-comments').setup { signs = false }
 
 -- ============================================================
--- Mini.statusline - statusline styling
+-- Statusline Styling
 -- ============================================================
+-- vim.pack.add {
+--   { src = helper.gh 'nvim-mini/mini.statusline', version = 'stable' },
+-- }
+-- local statusline = require 'mini.statusline'
+-- statusline.setup { use_icons = vim.g.have_nerd_font }
+-- ---@diagnostic disable-next-line: duplicate-set-field
+-- statusline.section_location = function() return '%2l:%-2v' end
 vim.pack.add {
-  { src = helper.gh 'nvim-mini/mini.statusline', version = 'stable' },
+  'https://github.com/nvim-tree/nvim-web-devicons',
+  'https://github.com/nvim-lualine/lualine.nvim',
 }
-local statusline = require 'mini.statusline'
-statusline.setup { use_icons = vim.g.have_nerd_font }
----@diagnostic disable-next-line: duplicate-set-field
-statusline.section_location = function() return '%2l:%-2v' end
+require('lualine').setup {
+  options = { theme = 'auto' },
+}
 
 -- ============================================================
--- Mini.ai - enhanced a and i commands
+-- Enhanced a and i commands
 -- ============================================================
 vim.pack.add {
   { src = helper.gh 'nvim-mini/mini.ai', version = 'stable' },
@@ -44,19 +51,9 @@ require('mini.ai').setup {
 }
 
 -- ============================================================
--- Mini.surround - enhanced surround commands
+-- Enhanced Surround Commands
 -- ============================================================
 vim.pack.add {
   { src = helper.gh 'nvim-mini/mini.surround', version = 'stable' },
 }
 require('mini.surround').setup()
-
--- ============================================================
--- Trouble - a pretty list for diagnostic, references, quickfix
--- and location lists
--- ============================================================
-vim.pack.add {
-  { src = helper.gh 'folke/trouble.nvim', version = 'stable' },
-}
-
-require('trouble').setup {}

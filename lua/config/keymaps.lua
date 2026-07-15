@@ -1,12 +1,11 @@
 -- ============================================================
--- Keymaps for functions that are neovim standard and don't have a dedicateed config file
+-- Keymaps for functions that are n ovim standard and don't have a dedicateed config file
 -- ============================================================
 local helper = require 'config.helper'
 
 -- ============================================================
 -- Whichkey - plugin to show keymaps while tyiping
 -- ============================================================
-
 vim.pack.add { helper.gh 'folke/which-key.nvim' }
 
 require('which-key').setup {
@@ -15,10 +14,12 @@ require('which-key').setup {
   icons = { mappings = vim.g.have_nerd_font },
   -- Document existing key chains
   spec = {
+    { '<leader>e', group = '[E]ditor', mode = { 'n' } },
     { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-    { '<leader>t', group = '[T]oggle' },
+    { '<leader>t', group = '[T]est', mode = { 'n' } },
     { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-    { 'gr', group = 'LSP Actions', mode = { 'n' } },
+    { 'gl', group = 'LSP Actions', mode = { 'n', 'v' } },
+    { '<leader>tw', group = '[W]atch', mode = { 'n' } },
   },
 }
 

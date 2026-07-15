@@ -17,15 +17,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Rename the variable under your cursor.
     --  Most Language Servers support renaming across files, etc.
-    map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+    vim.keymap.set({ 'n' }, 'gln', vim.lsp.buf.rename, { buffer = event.buf, desc = 'Re[n]ame' })
 
     -- Execute a code action, usually your cursor needs to be on top of an error
     -- or a suggestion from your LSP for this to activate.
-    map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+    vim.keymap.set({ 'n', 'x' }, 'gla', vim.lsp.buf.code_action, { buffer = event.buf, desc = '[G]oto Code [A]ction' })
 
     -- WARN: This is not Goto Definition, this is Goto Declaration.
     --  For example, in C this would take you to the header.
-    map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    vim.keymap.set({ 'n' }, 'glD', vim.lsp.buf.declaration, { buffer = event.buf, desc = '[G]oto [D]eclaration' })
 
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
@@ -61,7 +62,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     --
     -- This may be unwanted, since they displace some of your code
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
-      map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+      map('<leader>eh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Toggle Inlay [H]ints')
     end
   end,
 })
@@ -75,7 +76,36 @@ vim.pack.add {
 }
 
 local servers = {
-  basedpyright = {},
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          diagnosticSeverityOverrides = {
+            reportUnusedImport = 'none', -- F401
+            reportUnusedVariable = 'none', -- F841
+            reportUnusedExpression = 'none', -- B018
+            reportUndefinedVariable = 'none', -- F821
+            reportUnboundVariable = 'none', -- F823
+            reportRedeclaration = 'none', -- F811
+            reportUnsupportedDunderAll = 'none', -- F822
+            reportWildcardImportFromLibrary = 'none', -- F403/F405
+            reportAssertAlwaysTrue = 'none', -- F631
+            reportInvalidStringEscapeSequence = 'none', -- W605
+            reportSelfClsParameterName = 'none', -- N804/N805
+            -- keep reportPossiblyUnbound ON — ruff is weaker here
+          },
+        },
+        disableOrganizeImports = true,
+      },
+    },
+  },
+  cmake = {},
+  clangd = {
+    filetypes = { 'c', 'cpp' },
+  },
+  sourcekit = {
+    filetypes = { 'swift', 'objc', 'objcpp' },
+  },
   lua_ls = {
     on_init = function(client)
       client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
@@ -104,6 +134,9 @@ local servers = {
         format = { enable = false }, -- Disable formatting (formatting is done by stylua)
       },
     },
+  },
+  ruff = {
+    on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
   },
 }
 

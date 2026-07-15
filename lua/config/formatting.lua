@@ -3,7 +3,6 @@
 -- ============================================================
 
 local helper = require 'config.helper'
-local test = 1
 
 vim.pack.add { helper.gh 'stevearc/conform.nvim' }
 require('conform').setup {
@@ -12,7 +11,13 @@ require('conform').setup {
     -- You can specify filetypes to autoformat on save here:
     local enabled_filetypes = {
       lua = true,
-      -- python = true,
+      python = true,
+      c = true,
+      cpp = true,
+      objc = true,
+      objcpp = true,
+      cuda = true,
+      swift = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
       return { timeout_ms = 500 }
@@ -25,13 +30,15 @@ require('conform').setup {
   },
   -- You can also specify external formatters in here.
   formatters_by_ft = {
-    lua = { 'stylua' },
-    -- rust = { 'rustfmt' },
-    -- Conform can also run multiple formatters sequentially
-    -- python = { "isort", "black" },
-    --
-    -- You can use 'stop_after_first' to run the first available formatter from the list
+    c = { 'clang_format' },
+    cpp = { 'clang_format' },
+    cuda = { 'clang_format' },
     -- javascript = { "prettierd", "prettier", stop_after_first = true },
+    lua = { 'stylua' },
+    objc = { 'clang_format' },
+    objcpp = { 'clang_format' },
+    python = { 'ruff_format', 'ruff_fix' },
+    swift = { 'swift_format' },
   },
 }
 
