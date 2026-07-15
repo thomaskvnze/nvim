@@ -14,12 +14,17 @@ require('which-key').setup {
   icons = { mappings = vim.g.have_nerd_font },
   -- Document existing key chains
   spec = {
+    { '<leader>b', group = '[B]uffer', mode = { 'n' } },
+    { '<leader>d', group = '[D]ebug', mode = { 'n' } },
     { '<leader>e', group = '[E]ditor', mode = { 'n' } },
+    { '<leader>f', group = '[F]ind', mode = { 'n', 'v' } },
+    { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
+    { '<leader>gf', group = '[F]ind', mode = { 'n', 'v' } },
     { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
     { '<leader>t', group = '[T]est', mode = { 'n' } },
-    { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-    { 'gl', group = 'LSP Actions', mode = { 'n', 'v' } },
     { '<leader>tw', group = '[W]atch', mode = { 'n' } },
+    { '<leader>u', group = '[U]tility', mode = { 'n' } },
+    -- '<leader>x' [X]code group is registered dynamically in config/xcode.lua
   },
 }
 

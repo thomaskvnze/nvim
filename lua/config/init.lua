@@ -12,6 +12,9 @@ require 'config.theme'
 -- Set keymaps for standard neovim functions
 require 'config.keymaps'
 
+-- Configure git
+require 'config.git'
+
 -- Configure file browser
 require 'config.filebrowser'
 
@@ -21,12 +24,28 @@ require 'config.treesitter'
 -- Configure diagnostics
 require 'config.diagnostics'
 
--- Configure git
-require 'config.git'
-
 -- Configure search and navigation
 require 'config.navigation'
 
+-- Miscellaneous utility features
+require 'config.editing'
+
+-- Configure testing capabilities
+require 'config.testing'
+
+-- Configure debugging capabilitites
+require 'config.dap'
+
+-- Configure task and job manager
+require 'config.task'
+
+-- Configure advanced terminal
+require 'config.terminal'
+
+-- ============================================================
+-- Language & Ecosystem specific configurations
+-- Ties together all configs and plugins in correct order
+-- ============================================================
 -- Confiugre lsps, completions, linters and formatters
 require 'config.lsp'
 
@@ -36,11 +55,11 @@ require 'config.formatting'
 -- Configure advanced autocompletion
 require 'config.autocomplete'
 
--- Configure testing capabilities
-require 'config.testing'
+-- Configure cmake capabilitites for cross-platform development
+require 'config.cmake'
 
--- Miscellaneous utility features
-require 'config.editing'
-
--- Xcodebuild
+-- Configure tooling for apple development
 require 'config.xcode'
+
+-- Configure python specific tooling
+require 'config.python'

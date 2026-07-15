@@ -24,10 +24,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- or a suggestion from your LSP for this to activate.
     vim.keymap.set({ 'n', 'x' }, 'gla', vim.lsp.buf.code_action, { buffer = event.buf, desc = '[G]oto Code [A]ction' })
 
-    -- WARN: This is not Goto Definition, this is Goto Declaration.
-    --  For example, in C this would take you to the header.
-    vim.keymap.set({ 'n' }, 'glD', vim.lsp.buf.declaration, { buffer = event.buf, desc = '[G]oto [D]eclaration' })
-
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
     --    See `:help CursorHold` for information about when this is executed

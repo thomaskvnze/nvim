@@ -1,5 +1,5 @@
 -- ============================================================
--- Additional formatting functionality beyond the lsp formatter
+-- formatting functionality beyond the lsp formatter
 -- ============================================================
 
 local helper = require 'config.helper'
@@ -42,4 +42,4 @@ require('conform').setup {
   },
 }
 
-vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
+vim.keymap.set({ 'n', 'v' }, 'gw', function() require('conform').format { async = true } end, { desc = 'Format buffer' })
