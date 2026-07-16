@@ -77,7 +77,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.pack.add {
   helper.gh 'neovim/nvim-lspconfig',
+  helper.gh 'b0o/SchemaStore.nvim',
 }
+
+-- Formatting is owned by conform (see config.formatting); stop language servers
+-- from advertising formatting so there is a single source of truth.
+local function disable_lsp_formatting(client)
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+end
 
 local servers = {
   basedpyright = {
@@ -100,6 +108,30 @@ local servers = {
           },
         },
         disableOrganizeImports = true,
+      },
+    },
+  },
+  biome = {
+    on_init = disable_lsp_formatting,
+    -- json/jsonc linting is owned by jsonls; keep biome off those filetypes so
+    -- there is a single diagnostics source. JS/TS(X) linting is owned by vtsls.
+    -- (Default biome filetypes minus json/jsonc and javascript/typescript(react).)
+    filetypes = {
+      'astro',
+      'css',
+      'graphql',
+      'svelte',
+      'vue',
+    },
+  },
+  jsonls = {
+    -- conform (biome) owns json/jsonc formatting; jsonls owns lint diagnostics.
+    on_init = disable_lsp_formatting,
+    settings = {
+      json = {
+        -- Schemas from SchemaStore (package.json, tsconfig.json, etc.).
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
       },
     },
   },
@@ -140,6 +172,10 @@ local servers = {
     },
   },
   terraformls = {},
+  vtsls = {
+    -- conform (biome) owns formatting; vtsls owns lint diagnostics for JS/TS(X).
+    on_init = disable_lsp_formatting,
+  },
   ruff = {
     on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
   },
