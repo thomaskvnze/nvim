@@ -30,9 +30,6 @@ require 'config.navigation'
 -- Miscellaneous utility features
 require 'config.editing'
 
--- Configure testing capabilities
-require 'config.testing'
-
 -- Configure debugging capabilitites
 require 'config.dap'
 
@@ -63,3 +60,9 @@ require 'config.xcode'
 
 -- Configure python specific tooling
 require 'config.python'
+
+-- Configure rustaceanvim
+require 'config.rust'
+
+-- Configure testing capabilities
+require 'config.testing'

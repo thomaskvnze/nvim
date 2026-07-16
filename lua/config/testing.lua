@@ -20,6 +20,7 @@ neotest.setup {
       },
       runner = 'pytest',
     },
+    require 'rustaceanvim.neotest',
   },
 }
 

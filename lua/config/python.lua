@@ -2,12 +2,6 @@
 -- Python specific configuration
 -- ============================================================
 
--- ============================================================
--- Debug keymaps (under the existing [D]ebug which-key group)
--- Attached only while Neovim's cwd is inside a Python project and
--- removed again when you :cd out of it. The dap-python plugin itself
--- is loaded/configured in config.dap.
--- ============================================================
 local dap_python = require 'dap-python'
 
 local python_keymaps = {
@@ -33,7 +27,6 @@ local function detach_python_keymaps()
   end
 end
 
--- Detect a Python project by common project markers at or above the cwd.
 local python_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile' }
 
 local function sync_python_keymaps()

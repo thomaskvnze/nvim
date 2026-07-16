@@ -160,26 +160,26 @@ require('cmake-tools').setup {
 }
 
 -- ============================================================
--- Keymaps (under the [C]Make which-key group)
+-- Keymaps (under the C[M]ake which-key group)
 -- Attached only while Neovim's cwd is inside a CMake project (a
 -- CMakeLists.txt exists at or above the cwd). They are removed again
 -- when you :cd out of the project.
 -- ============================================================
 local cmake_keymaps = {
-  { '<leader>cg', '<cmd>CMakeGenerate<cr>', '[G]enerate' },
-  { '<leader>cb', '<cmd>CMakeBuild<cr>', '[B]uild' },
-  { '<leader>cr', '<cmd>CMakeRun<cr>', '[R]un' },
-  { '<leader>cd', '<cmd>CMakeDebug<cr>', '[D]ebug' },
-  { '<leader>cx', '<cmd>CMakeClean<cr>', 'Clean (X)' },
-  { '<leader>cq', '<cmd>CMakeStop<cr>', 'Stop / [Q]uit task' },
-  { '<leader>ct', '<cmd>CMakeSelectBuildTarget<cr>', 'Select build [T]arget' },
-  { '<leader>cl', '<cmd>CMakeSelectLaunchTarget<cr>', 'Select [L]aunch target' },
-  { '<leader>ck', '<cmd>CMakeSelectKit<cr>', 'Select [K]it' },
-  { '<leader>cp', '<cmd>CMakeSelectConfigurePreset<cr>', 'Select [P]reset' },
-  { '<leader>cv', '<cmd>CMakeSelectBuildType<cr>', 'Select [V]ariant / build type' },
-  { '<leader>cT', '<cmd>CMakeRunTest<cr>', 'Run [T]ests (ctest)' },
-  { '<leader>co', '<cmd>CMakeOpenRunner<cr>', '[O]pen executor output' },
-  { '<leader>cc', '<cmd>CMakeCloseRunner<cr>', '[C]lose executor output' },
+  { '<leader>mg', '<cmd>CMakeGenerate<cr>', '[G]enerate' },
+  { '<leader>mb', '<cmd>CMakeBuild<cr>', '[B]uild' },
+  { '<leader>mr', '<cmd>CMakeRun<cr>', '[R]un' },
+  { '<leader>md', '<cmd>CMakeDebug<cr>', '[D]ebug' },
+  { '<leader>mx', '<cmd>CMakeClean<cr>', 'Clean (X)' },
+  { '<leader>mq', '<cmd>CMakeStop<cr>', 'Stop / [Q]uit task' },
+  { '<leader>mt', '<cmd>CMakeSelectBuildTarget<cr>', 'Select build [T]arget' },
+  { '<leader>ml', '<cmd>CMakeSelectLaunchTarget<cr>', 'Select [L]aunch target' },
+  { '<leader>mk', '<cmd>CMakeSelectKit<cr>', 'Select [K]it' },
+  { '<leader>mp', '<cmd>CMakeSelectConfigurePreset<cr>', 'Select [P]reset' },
+  { '<leader>mv', '<cmd>CMakeSelectBuildType<cr>', 'Select [V]ariant / build type' },
+  { '<leader>mT', '<cmd>CMakeRunTest<cr>', 'Run [T]ests (ctest)' },
+  { '<leader>mo', '<cmd>CMakeOpenRunner<cr>', '[O]pen executor output' },
+  { '<leader>mc', '<cmd>CMakeCloseRunner<cr>', '[C]lose executor output' },
 }
 
 local keymaps_attached = false
@@ -187,7 +187,7 @@ local keymaps_attached = false
 local function attach_cmake_keymaps()
   if keymaps_attached then return end
   keymaps_attached = true
-  require('which-key').add { { '<leader>c', group = '[C]Make', mode = 'n' } }
+  require('which-key').add { { '<leader>m', group = 'C[M]ake', mode = 'n' } }
   for _, m in ipairs(cmake_keymaps) do
     vim.keymap.set('n', m[1], m[2], { desc = m[3] })
   end

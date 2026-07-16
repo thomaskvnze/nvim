@@ -18,11 +18,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Rename the variable under your cursor.
     --  Most Language Servers support renaming across files, etc.
 
-    vim.keymap.set({ 'n' }, 'gln', vim.lsp.buf.rename, { buffer = event.buf, desc = 'Re[n]ame' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>cr', vim.lsp.buf.rename, { buffer = event.buf, desc = '[R]ename' })
 
     -- Execute a code action, usually your cursor needs to be on top of an error
     -- or a suggestion from your LSP for this to activate.
-    vim.keymap.set({ 'n', 'x' }, 'gla', vim.lsp.buf.code_action, { buffer = event.buf, desc = '[G]oto Code [A]ction' })
+    vim.keymap.set({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'Code [A]ction' })
+
+    -- Run the code lens action under (or above) your cursor.
+    vim.keymap.set({ 'n', 'x' }, '<leader>cl', vim.lsp.codelens.run, { buffer = event.buf, desc = 'Code [L]ens Action' })
 
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
@@ -58,7 +61,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     --
     -- This may be unwanted, since they displace some of your code
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
-      map('<leader>eh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Toggle Inlay [H]ints')
+      vim.keymap.set(
+        { 'n' },
+        '<leader>ch',
+        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
+        { buffer = event.buf, desc = 'Toggle Inlay [H]ints' }
+      )
     end
   end,
 })
@@ -131,6 +139,7 @@ local servers = {
       },
     },
   },
+  terraformls = {},
   ruff = {
     on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
   },

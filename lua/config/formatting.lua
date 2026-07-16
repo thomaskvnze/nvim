@@ -14,10 +14,14 @@ require('conform').setup {
       python = true,
       c = true,
       cpp = true,
+      cuda = true,
       objc = true,
       objcpp = true,
-      cuda = true,
+      rust = true,
       swift = true,
+      tf = true,
+      ['terraform-vars'] = true,
+      terraform = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
       return { timeout_ms = 500 }
@@ -30,16 +34,20 @@ require('conform').setup {
   },
   -- You can also specify external formatters in here.
   formatters_by_ft = {
-    c = { 'clang_format' },
-    cpp = { 'clang_format' },
-    cuda = { 'clang_format' },
+    c = { 'clang-format' },
+    cpp = { 'clang-format' },
+    cuda = { 'clang-format' },
     -- javascript = { "prettierd", "prettier", stop_after_first = true },
     lua = { 'stylua' },
-    objc = { 'clang_format' },
-    objcpp = { 'clang_format' },
+    objc = { 'clang-format' },
+    objcpp = { 'clang-format' },
     python = { 'ruff_format', 'ruff_fix' },
-    swift = { 'swift_format' },
+    terraform = { 'terraform_fmt' },
+    tf = { 'terraform_fmt' },
+    ['terraform-vars'] = { 'terraform_fmt' },
+    rust = { 'rustfmt' },
+    swift = { 'swift' },
   },
 }
 
-vim.keymap.set({ 'n', 'v' }, 'gw', function() require('conform').format { async = true } end, { desc = 'Format buffer' })
+vim.keymap.set({ 'n', 'v' }, '<leader>cf', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
