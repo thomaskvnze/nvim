@@ -17,7 +17,17 @@ snacks.setup {
   indent = { enabled = false },
   input = { enabled = false },
   notifier = { enabled = false },
-  picker = { enabled = true },
+  picker = {
+    enabled = true,
+    actions = require('trouble.sources.snacks').actions,
+    win = {
+      input = {
+        keys = {
+          ['<c-t>'] = { 'trouble_open', mode = { 'n', 'i' } },
+        },
+      },
+    },
+  },
   quickfix = { enabled = false },
   scope = { enabled = false },
   scroll = { enabled = false },
@@ -29,15 +39,15 @@ snacks.setup {
 vim.keymap.set('n', '<leader><space>', function() snacks.picker.smart() end, { desc = 'Smart Find Files' })
 vim.keymap.set('n', '<leader>,', function() snacks.picker.buffers() end, { desc = 'Buffers' })
 vim.keymap.set('n', '<leader>/', function() snacks.picker.grep() end, { desc = 'Grep' })
-vim.keymap.set('n', '<leader>:', function() snacks.picker.command_history() end, { desc = 'Command History' })
-vim.keymap.set('n', '<leader>n', function() snacks.picker.notifications() end, { desc = '[N]otification History' })
-vim.keymap.set('n', '<leader>ee', function() snacks.explorer() end, { desc = 'File [E]xplorer' })
+vim.keymap.set('n', '<leader>fc', function() snacks.picker.command_history() end, { desc = '[C]ommand History' })
+vim.keymap.set('n', '<leader>fn', function() snacks.picker.notifications() end, { desc = '[N]otifications History' })
+vim.keymap.set('n', '<leader>ve', function() snacks.explorer() end, { desc = '[E]xplorer' })
 
 -- find
 vim.keymap.set('n', '<leader>fb', function() snacks.picker.buffers() end, { desc = '[B]uffers' })
-vim.keymap.set('n', '<leader>fc', function() snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, { desc = 'Find [C]onfig File' })
-vim.keymap.set('n', '<leader>ff', function() snacks.picker.files() end, { desc = 'Find [F]iles' })
-vim.keymap.set('n', '<leader>fg', function() snacks.picker.git_files() end, { desc = 'Find [G]it Files' })
+vim.keymap.set('n', '<leader>fo', function() snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, { desc = 'C[o]nfig File' })
+vim.keymap.set('n', '<leader>ff', function() snacks.picker.files() end, { desc = '[F]iles' })
+vim.keymap.set('n', '<leader>fg', function() snacks.picker.git_files() end, { desc = '[G]it Files' })
 vim.keymap.set('n', '<leader>fp', function() snacks.picker.projects() end, { desc = '[P]rojects' })
 vim.keymap.set('n', '<leader>fr', function() snacks.picker.recent() end, { desc = '[R]ecent' })
 
@@ -90,7 +100,7 @@ vim.keymap.set('n', '<leader>S', function() snacks.scratch.select() end, { desc 
 vim.keymap.set('n', '<leader>bd', function() snacks.bufdelete() end, { desc = '[D]elete Buffer' })
 vim.keymap.set('n', '<leader>bR', function() snacks.rename.rename_file() end, { desc = '[R]ename File' })
 vim.keymap.set({ 'n', 'v' }, '<leader>gB', function() snacks.gitbrowse() end, { desc = 'Open in [B]rowser' })
-vim.keymap.set('n', '<leader>gg', function() snacks.lazygit() end, { desc = 'Lazy[g]it' })
+vim.keymap.set('n', '<leader>vG', function() snacks.lazygit() end, { desc = 'Lazy[G]it' })
 vim.keymap.set('n', '<leader>un', function() snacks.notifier.hide() end, { desc = 'Dismiss All [N]otifications' })
 -- Terminal is handled by toggleterm (see config/terminal.lua)
 vim.keymap.set({ 'n', 't' }, ']]', function() snacks.words.jump(vim.v.count1) end, { desc = 'Next Reference' })
@@ -105,7 +115,7 @@ vim.keymap.set('v', '<leader>h', function()
   )
   local text = table.concat(lines, '\n')
   snacks.picker.help { pattern = text }
-end)
+end, { desc = '[H]elp under cursor' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('snacks-lsp-attach', { clear = true }),

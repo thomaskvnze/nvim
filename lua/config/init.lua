@@ -31,7 +31,7 @@ require 'config.navigation'
 require 'config.editing'
 
 -- Configure debugging capabilitites
-require 'config.dap'
+require 'config.debug'
 
 -- Configure task and job manager
 require 'config.task'

@@ -62,10 +62,17 @@ require('gitsigns').setup {
     map('n', '<leader>gq', gitsigns.setqflist, { desc = 'View Buffer In [Q]uicklist' })
 
     -- Toggles
-    map('n', '<leader>gB', gitsigns.blame)
-    map('n', '<leader>gw', gitsigns.toggle_word_diff)
+    map('n', '<leader>vb', gitsigns.blame, { desc = 'Git [B]lame' })
+    map('n', '<leader>gw', gitsigns.toggle_word_diff, { desc = 'View Buffer In [Q]uicklist' })
 
     -- Text object
     map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
   end,
 }
+
+vim.pack.add { helper.gh 'sindrets/diffview.nvim' }
+require('diffview').setup {}
+
+vim.pack.add { helper.gh 'neogitorg/neogit' }
+require('neogit').setup {}
+vim.keymap.set('n', '<leader>vG', '<cmd>Neogit<cr>', { desc = 'Neo[g]it' })

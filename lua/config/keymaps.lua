@@ -32,6 +32,7 @@ require('which-key').setup {
     { '<leader>t', group = '[T]est', mode = { 'n' } },
     { '<leader>tw', group = '[W]atch', mode = { 'n' } },
     { '<leader>u', group = '[U]tility', mode = { 'n' } },
+    { '<leader>v', group = '[V]iew', mode = { 'n' } },
     { '[', group = '[ - Previous', mode = { 'n' } },
     { ']', group = '] - Next', mode = { 'n' } },
     -- Hide the disabled `gw` format operator from the popup

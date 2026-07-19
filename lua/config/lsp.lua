@@ -124,17 +124,7 @@ local servers = {
       'vue',
     },
   },
-  jsonls = {
-    -- conform (biome) owns json/jsonc formatting; jsonls owns lint diagnostics.
-    on_init = disable_lsp_formatting,
-    settings = {
-      json = {
-        -- Schemas from SchemaStore (package.json, tsconfig.json, etc.).
-        schemas = require('schemastore').json.schemas(),
-        validate = { enable = true },
-      },
-    },
-  },
+  jsonls = {},
   cmake = {},
   clangd = {
     filetypes = { 'c', 'cpp' },
