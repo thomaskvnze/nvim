@@ -75,4 +75,4 @@ require('diffview').setup {}
 
 vim.pack.add { helper.gh 'neogitorg/neogit' }
 require('neogit').setup {}
-vim.keymap.set('n', '<leader>vG', '<cmd>Neogit<cr>', { desc = 'Neo[g]it' })
+vim.keymap.set('n', '<leader>vg', '<cmd>Neogit<cr>', { desc = 'Neo[g]it' })

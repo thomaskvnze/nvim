@@ -11,6 +11,12 @@ vim.pack.add { helper.gh 'NMAC427/guess-indent.nvim' }
 require('guess-indent').setup {}
 
 -- ============================================================
+-- Undo tree (Neovim 0.12 builtin plugin)
+-- ============================================================
+vim.cmd.packadd 'nvim.undotree'
+vim.keymap.set('n', '<leader>vu', function() require('undotree').open { command = '55vnew' } end, { desc = '[U]ndo Tree' })
+
+-- ============================================================
 -- Highlighting for notes and todos in comments
 -- ============================================================
 vim.pack.add { helper.gh 'folke/todo-comments.nvim' }
@@ -56,4 +62,28 @@ require('mini.ai').setup {
 vim.pack.add {
   { src = helper.gh 'nvim-mini/mini.surround', version = 'stable' },
 }
-require('mini.surround').setup()
+require('mini.surround').setup {
+  mappings = {
+    add = '<leader>csa', -- Add surrounding in Normal and Visual modes
+    delete = '<leader>csd', -- Delete surrounding
+    find = '<leader>csf', -- Find surrounding (to the right)
+    find_left = '<leader>csF', -- Find surrounding (to the left)
+    highlight = '<leader>csh', -- Highlight surrounding
+    replace = '<leader>csr', -- Replace surrounding
+    update_n_lines = '<leader>csn', -- Update `n_lines`
+  },
+}
+
+-- ============================================================
+-- Advanced cursor navigation
+-- ============================================================
+vim.pack.add {
+  { src = helper.gh 'folke/flash.nvim' },
+}
+
+require('flash').setup {}
+vim.keymap.set({ 'n', 'x', 'o' }, 's', function() require('flash').jump() end, { desc = 'Flash' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'S', function() require('flash').treesitter() end, { desc = 'Flash Treesitter' })
+vim.keymap.set({ 'o' }, 'r', function() require('flash').remote() end, { desc = 'Remote Flash' })
+vim.keymap.set({ 'o', 'x' }, 'R', function() require('flash').treesitter_search() end, { desc = 'Treesitter Search' })
+vim.keymap.set({ 'c' }, '<c-s>', function() require('flash').toggle() end, { desc = 'Toggle Flash Search' })
